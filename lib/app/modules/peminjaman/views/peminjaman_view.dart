@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
+import 'package:petugas_perpus_indah/app/data/model/response_pinjam.dart';
 import '../controllers/peminjaman_controller.dart';
 
 class PeminjamanView extends GetView<PeminjamanController> {
@@ -13,12 +13,17 @@ class PeminjamanView extends GetView<PeminjamanController> {
         title: const Text('PeminjamanView'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'PeminjamanView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+        body: controller.obx((state) => ListView.separated(
+          itemCount: state!.length,
+          itemBuilder: (context, index){
+            DataPinjam dataPinjam = state[index];
+            return ListTile(
+              title: Text("${dataPinjam.user?.nama}"),
+              subtitle: Text("Penulis ${dataPinjam.book}\n${dataPinjam.tanggalPinjam} - ${dataPinjam.tanggalKembali}"),
+            );
+          },
+          separatorBuilder: (context, index)=> Divider(),
+        ))
     );
   }
 }

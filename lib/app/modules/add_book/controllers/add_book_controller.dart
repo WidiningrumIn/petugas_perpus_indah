@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:petugas_perpus_indah/app/modules/book/controllers/book_controller.dart';
 
 import '../../../data/constant/endpoint.dart';
 import '../../../data/provider/api_provider.dart';
@@ -18,6 +19,7 @@ class AddBookController extends GetxController {
   final TextEditingController tahun_terbitController = TextEditingController();
 
   final loading = false.obs;
+  final BookController _bookController = Get.find();
 
   //TODO: Implement AddBookController
 
@@ -49,12 +51,14 @@ class AddBookController extends GetxController {
           "judul": judulController.text.toString(),
           "penulis": penulisController.text.toString(),
           "penerbit": penerbitController.text.toString(),
-          "tahun terbit": int.parse(tahun_terbitController.text.toString())
+          "tahun_terbit": int.parse(tahun_terbitController.text.toString())
         });
         if (response.statusCode == 201) {
-          Get.back();
+          Get.offAllNamed(Routes.BOOK);
+          Get.snackbar("Berhasil", "Menambah Buku",
+          backgroundColor: Colors.green);
         } else {
-          Get.snackbar("Sorry", "Login gagal", backgroundColor: Colors.orange);
+          Get.snackbar("Sorry", "Menambah buku gagal", backgroundColor: Colors.orange);
         }
       }
       loading(false);

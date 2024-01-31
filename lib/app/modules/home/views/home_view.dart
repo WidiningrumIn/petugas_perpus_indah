@@ -17,7 +17,7 @@ class HomeView extends GetView<HomeController> {
         child: Column(
           children: [
             ElevatedButton(onPressed: ()=>Get.toNamed(Routes.BOOK), child: Text("Buku")),
-            ElevatedButton(onPressed: ()=>Get.toNamed(Routes.PEMINJAMAN), child: Text("Buku")),
+            ElevatedButton(onPressed: ()=>Get.toNamed(Routes.PEMINJAMAN), child: Text("Peminjam")),
           ],
         )
       ),
